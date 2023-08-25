@@ -13,7 +13,7 @@ enum solutions
     };
 
 
-struct Tests1 {
+struct Polynome {
     double a;
     double b;
     double c;
@@ -23,13 +23,13 @@ struct Tests1 {
 };
 
 
-int SolveSquare (double a, double b, double c, double *sol1, double *sol2);
+int SolveSquare(Polynome*);
 bool check(double i, double j);
-int SolveLinear(double b, double c, double *sol1);
-void PrintAnswer(int nRoots, double sol1, double sol2);
-void SolveEquation(double a, double b, double c, double *sol1, double *sol2, int *nRoots);
+int SolveLinear(Polynome*);
+void PrintAnswer(Polynome*);
+void SolveEquation(Polynome*);
 void InputCoef(double *a);
 void Sort(double *x1, double *x2);
 bool AnswerEqual(double x1, double x2, double xref, double x2ref, int nRoots, int nRootsRef);
-int TestOne(const Tests1*);
+int TestOne(const Polynome*);
 void TestAll();
