@@ -32,6 +32,16 @@ enum solutions
     };
 
 
+enum colors
+    {
+    DEFAULT_COLOR = FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN,
+    PURPLE_COLOR = FOREGROUND_RED | FOREGROUND_BLUE,
+    GREEN_COLOR = FOREGROUND_GREEN,
+    YELLOW_COLOR = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
+    RED_COLOR = FOREGROUND_RED
+    };
+
+
 /*!
  * Структура используется для всей программы.
  * \param a, b, c - коэффиценты квадратного или линейного уравнения.
@@ -62,3 +72,4 @@ bool AnswerEqual(double x1, double x2, double xref, double x2ref, int nRoots, in
 int TestOne(const Polynome*);
 void TestAll(const char* filename);
 void CheckingCMDarguments(int argc, char* argv[]);
+int SetColor(WORD nameofcolor);

@@ -1,10 +1,14 @@
 /*!
 \file
-\brief Основной файл программы.
-
-этот файл запускает программу.
+\brief Основной файл программы. Этот файл запускает программу.
 */
 
+/*! \mainpage Программа решающая квадратное уравение
+*
+*   Я люблю кошек и программирование.
+*
+*   мяу
+*/
 
 #include "header.h"
 
@@ -15,7 +19,9 @@
 
 int main(int argc, char* argv[])
      {
-     CheckingCMDarguments(argc, argv);
+     #ifdef TEST
+        CheckingCMDarguments(argc, argv);
+     #endif
 
      Polynome data = {};
 
@@ -30,7 +36,7 @@ int main(int argc, char* argv[])
      PrintAnswer(&data);
 
      return 0;
-    }
+     }
 
 
 /*!
@@ -63,31 +69,37 @@ void InputCoef(double *a)
  * \param[in] data - структура с коэффицентами, корнями и количеством корней квадратного или линейного уравнения.
  */
 
+
 void PrintAnswer(Polynome* data)
     {
     switch (data->nRoots)
         {
-        case no_roots: SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
+        case no_roots:
+                SetColor(RED_COLOR);
                 printf ("The equation has no solutions\n");
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+                SetColor(DEFAULT_COLOR);
                 system("pause");
                 break;
 
-        case one_root: SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+        case one_root:
+                SetColor(YELLOW_COLOR);
                 printf ("The equation has a unique solution: %lf\n", data->x1);
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+                SetColor(DEFAULT_COLOR);
                 system("pause");
                 break;
 
-        case two_roots: SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+        case two_roots:
+                SetColor(GREEN_COLOR);
                 printf ("The equation has two solutions:\n 1) %lf  2) %lf\n", data->x1, data->x2);
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+                SetColor(DEFAULT_COLOR);
                 system("pause");
                 break;
 
-        case inf_roots: SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE);
+
+        case inf_roots:
+                SetColor(PURPLE_COLOR);
                 printf ("The equation has an infinite number of solutions\n");
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+                SetColor(DEFAULT_COLOR);
                 system("pause");
                 break;
 
@@ -116,12 +128,20 @@ bool check(double i, double j)
 
 void ClearBuffer()
     {
-    int ch;
+    int ch = 0;
 
-    while ((ch = getchar()) != '\n')
-            {
-            }
+    while ((ch = getchar()) != '\n' && ch != EOF)
+        {
+        }
     }
+
+
+int SetColor(WORD nameofcolor)
+    {
+    return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), nameofcolor);
+    }
+
+
 
 
 
